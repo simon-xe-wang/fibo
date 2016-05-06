@@ -5,7 +5,6 @@ import com.esotericsoftware.yamlbeans.YamlReader;
 
 import java.io.*;
 import java.net.URI;
-import java.net.URL;
 
 /**
  * The config class containing all configuration information
@@ -17,7 +16,7 @@ public class FiboConfig {
     private int port;
     private String redisHost;
     private String topic;
-    private String kafkaBootupServer;
+    private String kafkaBootstrapServers;
     private String kafkaConsumerGroup;
 
     public static FiboConfig getInstance() {
@@ -78,16 +77,16 @@ public class FiboConfig {
         this.topic = topic;
     }
 
-    public Object getKafkaBootStrapServers() {
-        return this.kafkaBootupServer;
+    public String getKafkaBootstrapServers() {
+        return this.kafkaBootstrapServers;
     }
+    public void setKafkaBootstrapServers(String kafkaBootstrapServers) {
+        this.kafkaBootstrapServers = kafkaBootstrapServers;
+    }
+
 
     public Object getKafkaConsumerGroup() {
         return this.kafkaConsumerGroup;
-    }
-
-    public void setKafkaBootupServer(String kafkaBootupServer) {
-        this.kafkaBootupServer = kafkaBootupServer;
     }
 
     public void setKafkaConsumerGroup(String kafkaConsumerGroup) {

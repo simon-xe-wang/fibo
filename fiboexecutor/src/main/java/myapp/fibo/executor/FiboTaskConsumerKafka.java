@@ -32,7 +32,7 @@ public class FiboTaskConsumerKafka implements Runnable {
      */
     private void buildConsumer() {
         Properties props = new Properties();
-        props.put("bootstrap.servers", FiboConfig.getInstance().getKafkaBootStrapServers());
+        props.put("bootstrap.servers", FiboConfig.getInstance().getKafkaBootstrapServers());
         props.put("group.id", FiboConfig.getInstance().getKafkaConsumerGroup());
         props.put("enable.auto.commit", "false");
         props.put("session.timeout.ms", "30000");
