@@ -33,7 +33,7 @@ public class FiboExecutorClientKafka implements FiboExecutorClient {
         }
 
         Properties props = new Properties();
-        props.put("bootstrap.servers", FiboConfig.getInstance().getKafkaBootStrapServers());
+        props.put("bootstrap.servers", FiboConfig.getInstance().getKafkaBootstrapServers());
         props.put("acks", "all");
         props.put("retries", 0);
         props.put("batch.size", 16384);
