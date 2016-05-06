@@ -3,10 +3,7 @@ package myapp.fibo;
 
 import com.esotericsoftware.yamlbeans.YamlReader;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.InputStreamReader;
-import java.io.Reader;
+import java.io.*;
 import java.net.URI;
 import java.net.URL;
 
@@ -28,11 +25,14 @@ public class FiboConfig {
     }
 
     private static FiboConfig loadConfigFromFile() {
-        Reader reader = new InputStreamReader(ClassLoader.getSystemResourceAsStream(CONFIG_FILE_PATH));
+        InputStream in = ClassLoader.getSystemResourceAsStream(CONFIG_FILE_PATH);
+        if (in == null) {
+            throw new RuntimeException("Unable to locate the config file " + CONFIG_FILE_PATH + ". Make sure the conf directory is added into class path");
+        }
 
         YamlReader configReader = null;
         try {
-            configReader = new YamlReader(reader);
+            configReader = new YamlReader(new InputStreamReader(in));
             return configReader.read(FiboConfig.class);
         } catch (Exception e) {
             throw new RuntimeException(e);
