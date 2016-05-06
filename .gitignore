@@ -1,0 +1,14 @@
+out/
+target/
+build
+.project
+.settings
+.classpath
+.idea
+*.iws
+*.ipr
+*.iml
+*.pyc
+*.zip
+results/
+repo/

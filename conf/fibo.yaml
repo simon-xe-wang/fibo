@@ -1,0 +1,14 @@
+# Service vars
+host: localhost
+port: 8080
+
+# For Redis
+redisHost: 10.247.99.40
+
+# For Kafka
+topic: fibo_task
+kafkaBootupServer: 10.247.99.40
+kafkaConsumerGroup; task_consumer
+
+
+
