@@ -1,12 +1,7 @@
-/*
- * Copyright (c) 2015 EMC Corporation
- * All Rights Reserved
- */
 package myapp.fibo.testutil;
 
 import junit.framework.Assert;
 import myapp.fibo.FiboTask;
-import myapp.fibo.IdGenerator;
 import myapp.fibo.IdGeneratorTimeImpl;
 
 import java.io.File;

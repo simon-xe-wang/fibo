@@ -1,12 +1,7 @@
-/*
- * Copyright (c) 2015 EMC Corporation
- * All Rights Reserved
- */
 package myapp.fibo.testutil;
 
 import java.time.Duration;
 import java.time.Instant;
-import java.util.Date;
 
 public class Timer {
 

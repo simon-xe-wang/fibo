@@ -1,12 +1,7 @@
-/*
- * Copyright (c) 2015 EMC Corporation
- * All Rights Reserved
- */
 package myapp.fibo;
 
-import myapp.util.TestUtil;
+import myapp.fibo.testutil.Timer;
 import org.junit.Test;
-import myapp.util.Timer;
 
 import java.util.ArrayList;
 import java.util.List;

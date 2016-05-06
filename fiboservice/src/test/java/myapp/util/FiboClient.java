@@ -2,6 +2,7 @@ package myapp.util;
 
 import myapp.fibo.FiboConfig;
 import myapp.fibo.FiboTask;
+import myapp.fibo.testutil.TestUtil;
 import org.glassfish.jersey.filter.LoggingFilter;
 
 import javax.ws.rs.client.Client;

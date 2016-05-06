@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2015 EMC Corporation
- * All Rights Reserved
- */
 package myapp.fibo.executor;
 
 import org.slf4j.Logger;
