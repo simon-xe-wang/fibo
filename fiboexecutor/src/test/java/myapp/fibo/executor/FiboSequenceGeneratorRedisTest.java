@@ -23,7 +23,7 @@ public class FiboSequenceGeneratorRedisTest {
 
     @Test
     public void testComputeFibo() {
-        int sn = 100000;
+        int sn = 100;
 
         Jedis jedis = new Jedis("10.247.99.40");
 
