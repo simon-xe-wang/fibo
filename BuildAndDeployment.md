@@ -31,7 +31,7 @@ Before jumping into long steps, I would like to show you which services are reqi
 - FiboService
 
 ####Steps:
-##### Step 1: Build and Start Redis
+##### Step 1: Build and Start Redis (3.0.7)
 - Build
 ```
 wget http://download.redis.io/redis-stable.tar.gz
@@ -49,10 +49,25 @@ $ redis-server
 ```
 Any trouble please refer to http://redis.io/topics/quickstart
 
-##### Step 1: Start Zookeeper & Kafka
-##### Step 1: Start Fibo Exectutor
-##### Step 1: Start Fibo Service
-##### Step: Run Fibo Client
+##### Step 2: Start Zookeeper & Kafka 0.9.0.1
+  - 1. Download from https://www.apache.org/dyn/closer.cgi?path=/kafka/0.9.0.1/kafka_2.11-0.9.0.1.tgz
+  - 2. Unpack
+```
+# tar xzf kafka_2.11-0.9.0.1.tgz
+```
+  - 3. Start Zookeeper
+```
+# cd kafka_2.11-0.9.0.1
+# bin/zookeeper-server-start.sh config/zookeeper.properties
+```
+  - 4. Start Broker
+```
+# bin/kafka-server-start.sh config/server.properties
+```
+
+##### Step 3: Start Fibo Exectutor
+##### Step 4: Start Fibo Service
+##### Step 5: Run Fibo Client
 ```
 # cd bin/
 # ./getfibo.sh <number> <file path> 
