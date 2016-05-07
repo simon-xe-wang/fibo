@@ -1,7 +1,7 @@
 # FiboService
 FiboService is REST based web service where user is able to get Fibonacci sequence by inputting a number. 
 
-FiboService uses distributed architecture and asynchronous task-base API as computing Fibonacci sequence is both time consuming and space consuming. More details please see the Design document listed bottom.
+FiboService uses distributed architecture and async task-based API as computing Fibonacci sequence is both time consuming and space consuming. More details please see the Design document listed bottom.
 
 Here is the typical flow to get a Fibonacci sequence:
 
