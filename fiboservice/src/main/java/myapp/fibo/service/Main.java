@@ -14,6 +14,11 @@ import java.net.URI;
  */
 public class Main {
 
+    // Add any packages contaning web resources here
+    public static String[] servicePackages = new String[] {
+            "myapp.fibo.service.resource"
+    };
+
     /**
      * Starts Grizzly HTTP server exposing JAX-RS resources defined in this application.
      * @return Grizzly HTTP server.
@@ -21,7 +26,7 @@ public class Main {
     public static HttpServer startServer() {
         // create a resource config that scans for JAX-RS resources and providers
         // in test package
-        final ResourceConfig rc = new ResourceConfig().packages("myapp.fibo.service.resource");
+        final ResourceConfig rc = new ResourceConfig().packages(servicePackages);
 
         URI baseUri = FiboConfig.getInstance().getBaseURI();
 
@@ -37,10 +42,8 @@ public class Main {
      */
     public static void main(String[] args) throws IOException {
         final HttpServer server = startServer();
-        System.out.println(String.format("Jersey app started with WADL available at "
-                + "%sapplication.wadl\nHit enter to stop it...", FiboConfig.getInstance().getBaseURI()));
-        System.in.read();
-        server.stop();
+        String msg = String.format("FiboService started at %s.", FiboConfig.getInstance().getBaseURI());
+        System.out.println(msg);
     }
 
 }
