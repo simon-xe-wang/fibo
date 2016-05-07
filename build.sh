@@ -1,10 +1,13 @@
 #!/bin/bash
 
-PKG_NAME=fibservice-1.0
+PKG_NAME=fiboservice-1.0
 BUILD_ROOT=build/${PKG_NAME}
 
-SRC_FIBO_SERVICE_JAR=target/fibservice-1.0-SNAPSHOT.jar
-DST_FIBO_SERVICE_JAR=${BUILD_ROOT}/lib/fibservice-1.0.jar
+FIBO_SERVICE_JAR=fiboservice/target/*.jar
+FIBO_EXECUTOR_JAR=fiboexecutor/target/*.jar
+FIBO_COMMON_JAR=common/target/*.jar
+
+FIBO_LIB_DIR=${BUILD_ROOT}/lib/
 
 _fatal() {
     echo "$0: Error: $*" >&2
@@ -14,7 +17,7 @@ _fatal() {
 # check maven existed
 
 # build jars by maven
-mvn package -Dmaven.test.skip=true || _fatal "Error to build jars by maven"
+mvn install -Dmaven.test.skip=true || _fatal "Error to build jars by maven"
 
 # clean bulid
 rm -rf build
@@ -27,9 +30,12 @@ mkdir -p ${BUILD_ROOT}/conf
 mkdir -p ${BUILD_ROOT}/logs
 mkdir -p ${BUILD_ROOT}/bin
 
-/bin/cp ${SRC_FIBO_SERVICE_JAR} ${DST_FIBO_SERVICE_JAR} || _fatal "Error to copy service jars"
+/bin/cp ${FIBO_SERVICE_JAR} ${FIBO_LIB_DIR} || _fatal "Error to copy service jars"
+/bin/cp ${FIBO_COMMON_JAR} ${FIBO_LIB_DIR} || _fatal "Error to copy common jars"
+/bin/cp ${FIBO_EXECUTOR_JAR} ${FIBO_LIB_DIR} || _fatal "Error to copy executor jars"
 /bin/cp -r conf/ ${BUILD_ROOT}/ || _fatal "Error to copy conf dir"
 /bin/cp -r bin/ ${BUILD_ROOT}/ || _fatal "Error to copy bin dir"
+chmod a+x ${BUILD_ROOT}/bin/*
 
 set -x
 # copy all dependency jars
