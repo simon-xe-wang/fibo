@@ -10,5 +10,5 @@ build
 *.iml
 *.pyc
 *.zip
+*.log
 results/
-repo/
