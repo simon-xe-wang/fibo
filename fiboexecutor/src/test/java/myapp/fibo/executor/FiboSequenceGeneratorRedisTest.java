@@ -1,6 +1,8 @@
 package myapp.fibo.executor;
 
-import myapp.fibo.testutil.Timer;
+import junit.framework.Assert;
+import myapp.fibo.FiboConfig;
+import myapp.fibo.seqstore.FiboSequenceStoreRedis;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,57 +13,50 @@ import java.io.FileWriter;
 import java.math.BigInteger;
 
 public class FiboSequenceGeneratorRedisTest {
+    Jedis jedis;
 
     @Before
     public void setUp() throws Exception {
+        jedis = new Jedis(FiboConfig.getInstance().getRedisHost());
+        jedis.flushDB();
     }
 
     @After
     public void tearDown() throws Exception {
-
-    }
-
-    @Test
-    public void testComputeFibo() {
-        int sn = 100;
-
-        Jedis jedis = new Jedis("10.247.99.40");
-
-        BigInteger fn_2 = BigInteger.ZERO;
-        BigInteger fn_1 = BigInteger.ONE;
-        BigInteger fn = BigInteger.ZERO;
-
-        for (int i = 2; i < sn; i++) {
-            fn = fn_2.add(fn_1);
-
-            jedis.set(new Integer(i).toString(), fn.toString());
-
-            // shift forward
-            fn_2 = fn_1;
-            fn_1 = fn;
-        }
-
         jedis.close();
     }
 
     @Test
-    public void testLoadFiboFromCache() throws Exception {
-        int sn = 1000;
+    public void testGenerateFibo() {
+        int sn = 100;
 
-        Jedis jedis = new Jedis("10.247.99.40");
+        FiboSequenceGeneratorRedis fiboGen = new FiboSequenceGeneratorRedis();
+        fiboGen.generateAndCache(sn);
+        verifyFiboFromCache(sn);
+    }
 
-        Timer timer = new Timer();
-        BufferedWriter writer = new BufferedWriter(new FileWriter("./test.result"));
-        try {
-            for (int i = 2; i < sn; i++) {
-                writer.write(jedis.get(new Integer(i).toString()));
+    public void verifyFiboFromCache(int sn) {
+        BigInteger fn_2 = BigInteger.ZERO;
+        BigInteger fn_1 = BigInteger.ONE;
+        BigInteger fn;
+
+        for (int i = 1; i <= sn; i++) {
+            String val = jedis.get(new Integer(i).toString());
+
+            if (i == 1) {
+                Assert.assertEquals("Error sn = " + i, "0", val);
+            } else if (i == 2) {
+                Assert.assertEquals("Error sn = " + i, "1", val);
+            } else {
+                fn = fn_2.add(fn_1);
+                Assert.assertEquals("Error sn = " + i, fn.toString(), val);
+
+                fn_2 = fn_1;
+                fn_1 = fn;
             }
-        } finally {
-            writer.close();
-            jedis.close();
         }
 
-        System.out.println("Spent " + timer.end());
-
+        String maxCachedSn = jedis.get(FiboSequenceStoreRedis.KEY_MAX_SN_CACHED);
+        Assert.assertEquals("Max Cached SN is not equal", sn, Integer.parseInt(maxCachedSn));
     }
 }

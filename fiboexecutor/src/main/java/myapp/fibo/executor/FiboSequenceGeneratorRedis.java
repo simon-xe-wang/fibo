@@ -1,11 +1,9 @@
 package myapp.fibo.executor;
 
-import myapp.fibo.FiboConfig;
 import myapp.fibo.seqstore.FiboSequenceStore;
 import myapp.fibo.seqstore.FiboSequenceStoreRedis;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import redis.clients.jedis.Jedis;
 
 import java.math.BigInteger;
 
@@ -44,13 +42,18 @@ public class FiboSequenceGeneratorRedis {
             }
 
             // Get the values of last 2 numbers cached
-            if (cachedSn > 2) {
+            if (cachedSn > 2) { // the value of 3 in cache
                 fn_2 = sequenceStore.getFiboVal(cachedSn - 1);
                 fn_1 = sequenceStore.getFiboVal(cachedSn);
             }
 
             // Append all non-cached sn
-            int startPos = (cachedSn <= 2) ? 3 : (cachedSn + 1); // No need to cache for sn 1 and 2
+            if (cachedSn <= 1) {
+                sequenceStore.writeFiboValue(1, BigInteger.ZERO);
+                sequenceStore.writeFiboValue(2, BigInteger.ONE);
+            }
+
+            int startPos = (cachedSn == 0) ? 3 : (cachedSn + 1);
             for (int i = startPos; i <= sn; i++) {
                 fn = fn_2.add(fn_1);
                 sequenceStore.writeFiboValue(i, fn);

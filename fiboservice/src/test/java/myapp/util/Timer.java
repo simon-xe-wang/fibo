@@ -1,4 +1,4 @@
-package myapp.fibo.testutil;
+package myapp.util;
 
 import java.time.Duration;
 import java.time.Instant;

@@ -1,4 +1,4 @@
-package myapp.fibo.testutil;
+package myapp.util;
 
 import junit.framework.Assert;
 import myapp.fibo.FiboTask;
@@ -67,14 +67,6 @@ public class TestUtil {
         }
 
         return fibos;
-    }
-
-    public static FiboTask createTask(int stateReady, int sn) {
-        FiboTask task = new FiboTask();
-        task.setId(new IdGeneratorTimeImpl().gen());
-        task.setSn(sn);
-        task.setState(FiboTask.STATE_INPROGRESS);
-        return task;
     }
 
     /**

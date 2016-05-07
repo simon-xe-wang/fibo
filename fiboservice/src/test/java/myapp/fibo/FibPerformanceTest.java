@@ -1,6 +1,6 @@
 package myapp.fibo;
 
-import myapp.fibo.testutil.Timer;
+import myapp.util.Timer;
 import org.junit.Test;
 
 import java.util.ArrayList;

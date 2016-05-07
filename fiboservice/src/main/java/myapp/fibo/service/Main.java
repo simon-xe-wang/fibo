@@ -21,7 +21,7 @@ public class Main {
     public static HttpServer startServer() {
         // create a resource config that scans for JAX-RS resources and providers
         // in test package
-        final ResourceConfig rc = new ResourceConfig().packages("myapp.fibo.resource");
+        final ResourceConfig rc = new ResourceConfig().packages("myapp.fibo.service.resource");
 
         URI baseUri = FiboConfig.getInstance().getBaseURI();
 

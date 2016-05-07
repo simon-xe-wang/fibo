@@ -24,15 +24,7 @@ public class FiboSequenceReaderRedis {
             return null;
         }
 
-        String val = null;
-        if (cursor == 1) {
-            val = BigInteger.ZERO.toString();
-        } else if (cursor == 2) {
-            val = BigInteger.ONE.toString();
-        } else {
-            val = jedis.get(Integer.toString(cursor));
-        }
-
+        String val = jedis.get(Integer.toString(cursor));
         cursor++;
         return val;
     }

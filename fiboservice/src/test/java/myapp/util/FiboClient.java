@@ -2,7 +2,6 @@ package myapp.util;
 
 import myapp.fibo.FiboConfig;
 import myapp.fibo.FiboTask;
-import myapp.fibo.testutil.TestUtil;
 import org.glassfish.jersey.filter.LoggingFilter;
 
 import javax.ws.rs.client.Client;
@@ -66,8 +65,8 @@ public class FiboClient {
                 // read the first byte which is task status
                 int taskStatus = rspStream.read();
                 if (taskStatus != FiboTask.STATE_READY) { // Not ready
-                    System.out.println("Task not ready, waiting 10 seconds and retry...");
-                    Thread.sleep(10*1000);
+                    System.out.println("Task not ready, waiting 3 seconds and retry...");
+                    Thread.sleep(3*1000);
                     continue;
                 } else { // Ready. Write to file
                     FileOutputStream rtResultFile = null;
