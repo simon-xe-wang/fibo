@@ -66,20 +66,22 @@ Any trouble please refer to http://redis.io/topics/quickstart
 ```
 
 ##### Step 3: Start Fibo Exectutor
+- 1. Unpack
+```
+# unzip fiboservice-1.0.zip
+```
+- 2. Start Executor service
+```
+# cd fiboservice-1.0/bin    // have to run from bin/
+# ./startexecutor.sh
+```
 ##### Step 4: Start Fibo Service
+```
+# cd fiboservice-1.0/bin    // have to run from bin/
+# ./startservice.sh
+```
 ##### Step 5: Run Fibo Client
 ```
 # cd bin/
 # ./getfibo.sh <number> <file path> 
 ```
-
-Unpack the package to a directory
-- Step 4: Configure Service
-
-  Set the host, port of service you want to run.
-  
-- Step 3: Run Service
-```
-# cd bin/
-# ./startserver
-
