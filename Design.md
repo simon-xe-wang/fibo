@@ -1,5 +1,8 @@
-#Requriements
-The basic function is very simple, nothing much wrothy to discuss. Because Fibonacci value computing is very time consuming operation, and the sequence 
+#Requriements Analysis
+
+The basic function is very simple, nothing much wrothy to discuss. The architecture and system design considering the following requirements:
+
+- Performance: Because Fibonacci value computing is very time consuming operation, and the sequence 
 takes huge size, the follwoing questions are needed to consider:
 
 1. Streaming response: The returning fibonacci sequence might be huge, so the service returns response in streamming way.
