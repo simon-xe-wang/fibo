@@ -1,7 +1,7 @@
 # FiboService
 FiboService is REST based web service where user is able to get Fibonacci sequence by inputting a number. 
 
-FiboService uses distributed architecture and async task-based API as computing Fibonacci sequence is both time consuming and space consuming. More details please see the Design document listed bottom.
+FiboService uses distributed architecture and async task-based API as computing Fibonacci sequence is a CPU-heavy usage job. More details please see the Design document listed bottom.
 
 Here is the typical flow to get a Fibonacci sequence:
 
@@ -77,5 +77,5 @@ This is a java example, using Jersey Client, to show the above procedure:
 - [Build and Deployment Service](https://github.com/thinkslower/fibo/blob/master/BuildAndDeployment.md)
 - [Design](https://github.com/thinkslower/fibo/blob/master/Design.md)
 - [Tests](https://github.com/thinkslower/fibo/blob/master/Tests.md)
-- [Next](https://github.com/thinkslower/fibo/blob/master/Next.md)
+
 
