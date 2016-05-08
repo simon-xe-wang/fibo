@@ -4,16 +4,16 @@ The basic function is very simple, nothing much wrothy to discuss. This kind of 
 
 1. Streaming response: The returning fibonacci sequence might be huge, so the service returns response in streamming way.
 - Cache: Tests found that computing without cache takes very high CPU usage. Single request is okay but multiple requests lead to 100% CPU usage. With the help of cache system, when processing multiple tasks, System is able to keep a stable CPU usage. Response time depends on the network bandwidth. 
-- Async API: Cache can help to solve the CPU usage issue, however it might be hard to make sure everything is in cache. There are still big chance for Sync API to overload system. So the safe way is design an async system. End user should be able to expect this is a time consuming task and don't expect much on latency. 
+- Async API: Cache can help to solve the CPU usage issue, however it might be hard to make sure everything is in cache. There are still big chance for Sync API to overload system. So the safe way is design an async system. End user should be able to expect this is a time consuming task and don't expect much on latency. If there are VIP kind of customers really want sync service, it is not hard to add. That would use dedicated resources to take task.
 - Distributed Architecture: based on the analysic above, we could have various requirements on hardware reousrce. Processor nodes need more CPU, Cache system need more memory and Fetch nodes need ore bandwidith. So running services on different hosts is good to take advantage of resources. Meanwhile, it provides cabability to scale to large.
 
 # Archtecture
-Ths system consists of 3 components: FiboService, FiboExecutorService and FiboSequenceStore
-- FiboService is used to accpet user's requests. 2 features:
-
-  1. Submit request to FiboExecutorService. If the request is accepted successfully, it will return a FiboTask to client.
-  2. Accept task query request and forward to FiboExecutorService.
-
+Ths system consists of 5 services: FiboService, FiboExecutorService, FiboFetchService, FiboTaskStore and FiboSequenceStore
+- FiboService is used to accpet user's requests and then create tasks and submit to Executor Service.
+  -- Kafka is used as task queue to make sure: 
+     1. Task should NOT be lost.
+     2. Capable of distributing load to multiple Executor nodes and also handle network or server down issue.  
+     
 - FiboExecutorService is the task processor. 
 
   It has a task queue in memory containing all tasks information. By which FiboService can submit and query task. 
