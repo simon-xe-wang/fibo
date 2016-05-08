@@ -8,7 +8,8 @@ The basic function is very simple, nothing much wrothy to discuss. This kind of 
 - Distributed Architecture: based on the analysic above, we could have various requirements on hardware reousrce. Processor nodes need more CPU, Cache system need more memory and Fetch nodes need ore bandwidith. So running services on different hosts is good to take advantage of resources. Meanwhile, it provides cabability to scale to large.
 
 # Archtecture
-[Diagram](https://drive.google.com/file/d/0B4dYAL73RDJHbjRnb1c0MkZ5a2s/view?usp=sharing)
+See [Diagram](https://drive.google.com/file/d/0B4dYAL73RDJHbjRnb1c0MkZ5a2s/view?usp=sharing)
+
 Ths system consists of 5 services: FiboService, FiboExecutorService, FiboFetchService, FiboTaskStore and FiboSequenceStore
 - FiboService is used to accpet user's requests and do:
   1. Create task and store to Task Store
