@@ -3,11 +3,11 @@ host: localhost
 port: 8080
 
 # For Redis
-redisHost: 10.247.99.46
+redisHost: localhost
 
 # For Kafka
 topic: fibo_task
-kafkaBootstrapServers: "10.247.99.40:9092"
+kafkaBootstrapServers: "localhost:9092"
 kafkaConsumerGroup: task_consumer
 
 
