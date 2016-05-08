@@ -28,18 +28,34 @@ public class FiboResource {
     private FiboTaskStore taskStore = new FiboTaskStoreRedis();
 
     @GET
-    @Produces({MediaType.APPLICATION_JSON})
-    public FiboTask getFiboAsync(@QueryParam("sn") int sn) throws Exception {
-        log.info("Received a request to get Sequence, sn = {}", sn);
+    // @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_OCTET_STREAM})
+    @Produces({MediaType.APPLICATION_OCTET_STREAM})
+    public Response getFibo(
+            @QueryParam("sn") int sn,
+            @DefaultValue("false") @QueryParam("sync") boolean sync) throws Exception {
+        log.info("Received a request to get Sequence, sn = {}, sync = {}", sn, sync);
 
         checkParam(sn);
 
+        if (sync) {
+            return getFiboSync(sn);
+        } else {
+            return getFiboAsync(sn);
+        }
+    }
+
+    public Response getFiboAsync(int sn) throws Exception {
         FiboTask task = createTask(sn);
         taskStore.save(task);
         executorClient.submit(task);
 
         log.info("Submitted a task to executor id = {}, sn = {}", task.getId(), sn);
-        return task;
+        return Response.ok(task).build();
+    }
+
+    public Response getFiboSync(int sn) {
+        FiboSequenceOutput2 output = new FiboSequenceOutput2(sn);
+        return Response.ok(output).build();
     }
 
     /**

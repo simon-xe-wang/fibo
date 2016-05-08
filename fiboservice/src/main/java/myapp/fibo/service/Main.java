@@ -41,10 +41,9 @@ public class Main {
      * @throws IOException
      */
     public static void main(String[] args) throws IOException {
-        final HttpServer server = startServer();
+        startServer();
         String msg = String.format("FiboService started at %s.", FiboConfig.getInstance().getBaseURI());
         System.out.println(msg);
     }
-
 }
 
