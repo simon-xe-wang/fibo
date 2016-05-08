@@ -1,20 +1,11 @@
-#Requriements Analysis
+#Requriements Analysis and High Level Design
 
-The basic function is very simple, nothing much wrothy to discuss. The architecture and system design considering the following requirements:
-
-- Performance: Because Fibonacci value computing is very time consuming operation, and the sequence 
-takes huge size, the follwoing questions are needed to consider:
+The basic function is very simple, nothing much wrothy to discuss. This kind of task like computing Fibonacci sequence has 2 features: 1) Take very high CPU usage and 2) Takes huge space. Based on the 2 features the architecture and system design uses the following ways to meet address the following questions:
 
 1. Streaming response: The returning fibonacci sequence might be huge, so the service returns response in streamming way.
-2. Async API: Computing a fibonacci value could take very long time, so asynchronus, task based API is required. This way system accepts requests very quick and
-processes all requests in controlled way.
-3. The number range can handle: This solution stores sequence in local disk for future use. A large number needs very huge storage space. 
-I have no exact size about how much disk space is required for a number. It could be at TB or PB level.
-4. Performance: Testing found that most time is spent on math computation and memory operation. Caching fibonacci sequence can improve peroformance 
-very much. For example, Computing a fibonacci for 40000 takes 15 seconds in my laptop, but takes 1 second only if load data directly from a local file. 
-5. Scalability: Each service is stateless, so it's easy to increase servers to handle more users. But this 
-needs a separated Fibonacci storage service which is able to be shared by front service nodes. Will discuss the solution in More Ideas
-6. Monitoring and Security: This are definily needed in production environment but not implemented in this solutioin due to time limit.
+- Cache: Tests found that computing without cache takes very high CPU usage. Single request is okay but multiple requests lead to 100% CPU usage. With the help of cache system, when processing multiple tasks, System is able to keep a stable CPU usage. Response time depends on the network bandwidth. 
+- Async API: Cache can help to solve the CPU usage issue, however it might be hard to make sure everything is in cache. There are still big chance for Sync API to overload system. So the safe way is design an async system. End user should be able to expect this is a time consuming task and don't expect much on latency. 
+- Distributed Architecture: based on the analysic above, we could have various requirements on hardware reousrce. Processor nodes need more CPU, Cache system need more memory and Fetch nodes need ore bandwidith. So running services on different hosts is good to take advantage of resources. Meanwhile, it provides cabability to scale to large.
 
 # Archtecture
 Ths system consists of 3 components: FiboService, FiboExecutorService and FiboSequenceStore
