@@ -17,14 +17,16 @@
 #More Tests
 Besides the basic functional testing, the following test areas are worthy to think about:
 
-- Max number system support
+- Max number system supports
+- 
+The max number tested is 100,000. Not sure if max integer works which depends on how much memory a host has.  
 
-It's impossible for system to support unlimited value. We should have one value from customer and see
-if system can hold it and transfer it over network. 
+- Failure Handling Test
+Even each service only has 1 instance running, when executor service is down, no task loss or handled multiple times.  
 
 - Load Testing
 
-Normal concurrent users keep loading the system with varrious number. Expect each request is returned in accepted duration and no error happened.
+Assuming each service only has 1 instance, make 100 or 200 concurrent users keep loading the system with varrious number. Expect each request is returned in accepted duration and no error happened. On the host where fetch service runs, the CPU usage should be < 50%.
 
 - Performance Testing
 
@@ -32,8 +34,5 @@ Similar to load, running in shorter time and more care about the performance res
 
 - Scalability Testing
 
-When increasing servers, system can serve more users in accepted response time.
+When increasing the number of executor and fetch service, the performance should be better.
 
-- Failure Handling Test
-
-When part of node down or network issue happens, system can still continue service. 
