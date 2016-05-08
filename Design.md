@@ -9,37 +9,33 @@ The basic function is very simple, nothing much wrothy to discuss. This kind of 
 
 # Archtecture
 Ths system consists of 5 services: FiboService, FiboExecutorService, FiboFetchService, FiboTaskStore and FiboSequenceStore
-- FiboService is used to accpet user's requests and then create tasks and submit to Executor Service.
-
-  -- Kafka is used as task queue to make sure: 
-     1. Task should NOT be lost.
-     2. Capable of distributing load to multiple Executor nodes and also handle network or server down issue.  
+- FiboService is used to accpet user's requests and do:
+  1. Create task and store to Task Store
+  2. Submit to Executor Service through Kafka-based Task Queue.
+  
+    - Kafka is used as it provides 2 capabilities:
+      1. No task loss.
+      2. Capable of distributing load to multiple Executor nodes and also handle network or server down issue.  
      
 - FiboExecutorService is the task processor. 
 
-  It has a task queue in memory containing all tasks information. By which FiboService can submit and query task. 
+  Task Consumer polls tasks from the Queue, for each task:
+    1. if the sequence is alrady in Fibo Store, then mark the task as ready directly. 
+    2. if whole or part of sequence is not in, then compute and store it into the store.  
+    
+- FiboTaskStore and FiboSequenceStore
 
-  FiboTaskWorker in FiboExecutorService is a thread running periodically to retrieve tasks in time order and then execute it. For each fibonacci task, if there is one with same sequence number 
-  in FiboSequenceStore, the task can be marked as ready directly. If not, processsor will compute one and store that into the store for future use.
-
-- FiboSequenceStore
-The repository to store all fibonacci sequence. Now all sequences are store in local disk as separate files. FiboExecutorService can store and 
-retrieve sequences by sequence number.
+The repository to store all fibonacci sequences and tasks. Use Redis as the underlying storage. It should be splitted to 2 Redis instances. 
 
 #API
-Expose 2 public REST APIs. 
+Expose 2 public REST APIs:
 
 - GET myapp/fibo?sn=(number)
 
     This returns task id directly.
 
-- GET myapp/fibo/task/id=(task id)
+- GET myapp/fibotask/id=(task id)
 
     The first byte is to indicate the status. If it's 0 (means ready) then continue to read rest of it.
 
-# Failure Handling
-
-#More Things to Be Optimized
-1. Right now all fibonacci sequence files in store are stored in flat way. It's required to bulid a tree hierarchy for better performance.
-2. Each task should have expired date. It will be removed after that. 
-3. Persist task queue in mysql or cassandra so the task data will not be lost when system reboot 
+#Next
