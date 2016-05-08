@@ -10,6 +10,7 @@ The basic function is very simple, nothing much wrothy to discuss. This kind of 
 # Archtecture
 Ths system consists of 5 services: FiboService, FiboExecutorService, FiboFetchService, FiboTaskStore and FiboSequenceStore
 - FiboService is used to accpet user's requests and then create tasks and submit to Executor Service.
+
   -- Kafka is used as task queue to make sure: 
      1. Task should NOT be lost.
      2. Capable of distributing load to multiple Executor nodes and also handle network or server down issue.  
