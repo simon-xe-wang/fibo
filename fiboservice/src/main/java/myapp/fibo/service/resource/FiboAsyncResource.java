@@ -28,7 +28,7 @@ public class FiboAsyncResource {
     private FiboTaskStore taskStore = new FiboTaskStoreRedis();
 
     @GET
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_OCTET_STREAM})
+    @Produces({MediaType.APPLICATION_JSON})
     public FiboTask getFiboAsync(@QueryParam("sn") int sn) throws Exception {
         log.info("Received a request to get Sequence, sn = {}", sn);
 
