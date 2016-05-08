@@ -1,10 +1,14 @@
-#Tests Done
-##Unit Test (Automated)
+#Tests Done (Automated)
+##Unit Test 
+
 - FiboTaskStoreRedisTest
-  - testSaveAndQuery
+  - testSaveAndQuery: Save and query and update task. Make sure task store works well. 
 - FiboSequenceGeneratorRedisTest
-  - testGenerateFibo
+  - testGenerateFiboWithoutCache: Generate a fibo sequence and verify if all data stored in cache and max cached sn is updated correctly
+  - testGenerateFiboAlreadyCached: Data already in cache, max cached sn should be old SN.
+
 ##Functional Test
+
 - FiboResourceTest
   - testGetFibo
   - testGetBatchFibo
