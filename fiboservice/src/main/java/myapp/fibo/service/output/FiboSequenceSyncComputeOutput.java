@@ -1,4 +1,4 @@
-package myapp.fibo.service.resource;
+package myapp.fibo.service.output;
 
 import myapp.fibo.FiboSequenceIterator;
 import myapp.fibo.FiboValueHandler;
@@ -11,10 +11,10 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.math.BigInteger;
 
-public class FiboSequenceOutput2 implements StreamingOutput {
+public class FiboSequenceSyncComputeOutput implements StreamingOutput {
     private int sn;
 
-    public FiboSequenceOutput2(int sn) {
+    public FiboSequenceSyncComputeOutput(int sn) {
         this.sn = sn;
     }
 

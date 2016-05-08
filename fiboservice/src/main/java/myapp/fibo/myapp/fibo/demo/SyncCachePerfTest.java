@@ -17,14 +17,12 @@ public class SyncCachePerfTest {
             FiboClient client = new FiboClient();
             Timer timer = new Timer();
             try {
-                client.getFiboSyncCache(sn);
+                client.getFiboSync(sn);
             } catch (Exception e) {
                 throw new RuntimeException("Error", e);
             }
 
             System.out.println("Spent " + timer.end());
-            //    System.out.println("value is " + fn.toString());
-            //    System.out.println("value size is " + fn.toString().length());
         }
     }
 

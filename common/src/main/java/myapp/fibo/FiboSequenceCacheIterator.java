@@ -9,13 +9,13 @@ import myapp.fibo.seqstore.FiboSequenceStoreRedis;
 
 import java.math.BigInteger;
 
-public class FiboSequenceIterator2 {
+public class FiboSequenceCacheIterator {
 
     private FiboValueHandler fiboHandler;
     private int sn;
     FiboSequenceStore fiboStore = new FiboSequenceStoreRedis();
 
-    public FiboSequenceIterator2(int sn) {
+    public FiboSequenceCacheIterator(int sn) {
         this.sn = sn;
     }
 

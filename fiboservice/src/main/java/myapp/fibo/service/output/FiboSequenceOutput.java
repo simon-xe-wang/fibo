@@ -2,9 +2,10 @@
  * Copyright (c) 2015 EMC Corporation
  * All Rights Reserved
  */
-package myapp.fibo.service.resource;
+package myapp.fibo.service.output;
 
 import myapp.fibo.FiboTask;
+import myapp.fibo.service.resource.FiboSequenceReaderRedis;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.StreamingOutput;

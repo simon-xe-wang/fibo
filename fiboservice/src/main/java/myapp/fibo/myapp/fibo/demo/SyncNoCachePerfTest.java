@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class SyncPerformanceTest {
+public class SyncNoCachePerfTest {
     private static class Worker implements Runnable {
         int sn;
 
@@ -18,14 +18,12 @@ public class SyncPerformanceTest {
             FiboClient client = new FiboClient();
             Timer timer = new Timer();
             try {
-                client.getFiboSync(sn);
+                client.getFiboSyncCompute(sn);
             } catch (Exception e) {
                 throw new RuntimeException("Error", e);
             }
 
             System.out.println("Spent " + timer.end());
-            //    System.out.println("value is " + fn.toString());
-            //    System.out.println("value size is " + fn.toString().length());
         }
     }
 

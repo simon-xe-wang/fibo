@@ -57,8 +57,9 @@ public class FiboResourceTest {
     /**
      * Invalid argument. Input a negative value. Expect get a clear error message.
      */
-    @Test
+    @Test(expected = Exception.class)
     public void testNegativeSn() throws Exception {
         int sn = -100;
+        fiboClient.getFiboAsyncAsFile(sn, resTestResultFile);
     }
 }
