@@ -2,7 +2,7 @@ package myapp.fibo;
 
 import myapp.fibo.service.Main;
 import myapp.util.TestUtil;
-import myapp.util.FiboClient;
+import myapp.fibo.client.FiboClient;
 import org.glassfish.grizzly.http.server.HttpServer;
 
 import org.junit.*;

@@ -27,6 +27,8 @@ public interface FiboSequenceStore {
      */
     BigInteger getFiboVal(int sn);
 
+    String getFiboValStr(int sn);
+
     /**
      * Try to update the max cached sn in store. If sn < cachedSn, do nothing
      * @param sn

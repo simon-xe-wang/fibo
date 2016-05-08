@@ -1,6 +1,7 @@
 package myapp.fibo.service.resource;
 
 import myapp.fibo.FiboSequenceIterator;
+import myapp.fibo.FiboSequenceIterator2;
 import myapp.fibo.FiboValueHandler;
 
 import javax.ws.rs.WebApplicationException;
@@ -11,16 +12,16 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.math.BigInteger;
 
-public class FiboSequenceOutput2 implements StreamingOutput {
+public class FiboSequenceOutput3 implements StreamingOutput {
     private int sn;
 
-    public FiboSequenceOutput2(int sn) {
+    public FiboSequenceOutput3(int sn) {
         this.sn = sn;
     }
 
     @Override
     public void write(OutputStream outputStream) throws IOException, WebApplicationException {
-        FiboSequenceIterator fiboItr = new FiboSequenceIterator(sn);
+        FiboSequenceIterator2 fiboItr = new FiboSequenceIterator2(sn);
         fiboItr.setHandler(new FiboValueSyncHandler(outputStream));
         fiboItr.run();
     }

@@ -50,6 +50,11 @@ public class FiboSequenceStoreRedis implements FiboSequenceStore {
     }
 
     @Override
+    public String getFiboValStr(int sn) {
+        return jedis.get(Integer.toString(sn) );
+    }
+
+    @Override
     public void close() {
         jedis.close();
     }

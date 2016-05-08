@@ -3,7 +3,7 @@ host: localhost
 port: 8080
 
 # For Redis
-redisHost: 10.247.99.40
+redisHost: 10.247.99.46
 
 # For Kafka
 topic: fibo_task

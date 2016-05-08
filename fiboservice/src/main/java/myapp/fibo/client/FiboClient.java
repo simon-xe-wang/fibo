@@ -1,4 +1,4 @@
-package myapp.util;
+package myapp.fibo.client;
 
 import myapp.fibo.FiboConfig;
 import myapp.fibo.FiboTask;
@@ -10,6 +10,7 @@ import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 
@@ -18,12 +19,12 @@ import java.io.InputStream;
  */
 public class FiboClient {
 
-    private static final int FILE_READ_BUF_SIZE = 1024 * 8;
+    private static final int FILE_READ_BUF_SIZE = 1024*1024;
     private WebTarget rootTarget;
 
     public FiboClient() {
         Client c = ClientBuilder.newClient();
-        c.register(new LoggingFilter());
+        //c.register(new LoggingFilter());
         rootTarget = c.target(FiboConfig.getInstance().getBaseURI());
     }
 
@@ -71,7 +72,7 @@ public class FiboClient {
                 } else { // Ready. Write to file
                     FileOutputStream rtResultFile = null;
                     try {
-                        rtResultFile = TestUtil.createResultFileOutputStream(resultFilePath);
+                        rtResultFile = createResultFileOutputStream(resultFilePath);
                         byte[] buf = new byte[FILE_READ_BUF_SIZE];
                         int nRead = 0;
                         while ((nRead = rspStream.read(buf)) > 0) {
@@ -88,6 +89,34 @@ public class FiboClient {
         }
     }
 
+    public void getFiboSync(int sn) throws Exception {
+
+        WebTarget fibTarget = rootTarget.path("fibosync").queryParam("sn", sn);
+        Invocation.Builder invocationBuilder = fibTarget.request(MediaType.APPLICATION_OCTET_STREAM);
+        Response response = invocationBuilder.get();
+
+        int httpStatus = response.getStatus();
+        if (httpStatus < 200 || httpStatus >= 300) {
+            throw new Exception("Request failed. Status code is " + httpStatus);
+        }
+
+        InputStream rspStream = response.readEntity(InputStream.class);
+        try {
+            byte[] buf = new byte[FILE_READ_BUF_SIZE];
+            int nRead = 0;
+            while ((nRead = rspStream.read(buf)) > 0) {
+            }
+        } finally {
+            rspStream.close();
+        }
+    }
+
+    public static FileOutputStream createResultFileOutputStream(String path) throws Exception {
+        File file = new File(path);
+        file.getParentFile().mkdirs();
+        return new FileOutputStream(file);
+    }
+
     public static void main(String[] args) {
         FiboClient client = new FiboClient();
         String resultFile = "./results/100_result";
@@ -100,4 +129,24 @@ public class FiboClient {
         }
     }
 
+    public void getFiboSyncCache(int sn) throws Exception {
+        WebTarget fibTarget = rootTarget.path("fibosync/cache").queryParam("sn", sn);
+        Invocation.Builder invocationBuilder = fibTarget.request(MediaType.APPLICATION_OCTET_STREAM);
+        Response response = invocationBuilder.get();
+
+        int httpStatus = response.getStatus();
+        if (httpStatus < 200 || httpStatus >= 300) {
+            throw new Exception("Request failed. Status code is " + httpStatus);
+        }
+
+        InputStream rspStream = response.readEntity(InputStream.class);
+        try {
+            byte[] buf = new byte[FILE_READ_BUF_SIZE];
+            int nRead = 0;
+            while ((nRead = rspStream.read(buf)) > 0) {
+            }
+        } finally {
+            rspStream.close();
+        }
+    }
 }
