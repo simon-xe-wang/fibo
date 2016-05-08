@@ -26,13 +26,32 @@ public class FiboSequenceGeneratorRedisTest {
         jedis.close();
     }
 
+    /**
+     * Generate a fibo sequence and verify if all data stored in cache and max cached sn is updated correctly
+     */
     @Test
-    public void testGenerateFibo() {
+    public void testGenerateFiboWithoutCache() {
         int sn = 100;
 
         FiboSequenceGeneratorRedis fiboGen = new FiboSequenceGeneratorRedis();
         fiboGen.generateAndCache(sn);
         verifyFiboFromCache(sn);
+    }
+
+    /**
+     * Data already in cache, max cached sn should be old SN.
+     */
+    @Test
+    public void testGenerateFiboAlreadyCached() {
+        int sn1 = 100;
+        FiboSequenceGeneratorRedis fiboGen = new FiboSequenceGeneratorRedis();
+        fiboGen.generateAndCache(sn1);
+
+        int sn2 = 50;
+        fiboGen = new FiboSequenceGeneratorRedis();
+        fiboGen.generateAndCache(sn2);
+
+        verifyFiboFromCache(sn1);
     }
 
     public void verifyFiboFromCache(int sn) {
