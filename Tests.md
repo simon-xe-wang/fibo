@@ -10,9 +10,9 @@
 ##Functional Test
 
 - FiboResourceTest
-  - testGetFibo
-  - testGetBatchFibo
-  - testNegativeSn
+  - testGetFibo: Get a fibo sequence with number 1000 or 100,000. Make sure each value is correct.
+  - testGetBatchFibo: Send 10 requests with different number and make sure each value is correct.
+  - testNegativeSn: Input a negative number or not a number make sure get a appropriate error message.
 
 #More Tests
 Besides the basic functional testing, the following test areas are worthy to think about:
