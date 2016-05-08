@@ -77,5 +77,5 @@ This is a java example, using Jersey Client, to show the above procedure:
 - [Build and Deployment Service](https://github.com/thinkslower/fibo/blob/master/BuildAndDeployment.md)
 - [Design](https://github.com/thinkslower/fibo/blob/master/Design.md)
 - [Tests](https://github.com/thinkslower/fibo/blob/master/Tests.md)
-- [Next](https://github.com/thinkslower/fibo/blob/master/Next.md)
+
 
