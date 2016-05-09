@@ -78,7 +78,7 @@ public class FiboClient {
                         while ((nRead = rspStream.read(buf)) > 0) {
                             rtResultFile.write(buf, 0, nRead);
                         }
-                        System.out.printf("Done! Dump all to file " + resultFilePath);
+                        System.out.printf("Done! Dump all to file \n" + resultFilePath);
                     } finally {
                         if (rspStream != null) {
                             rspStream.close();
