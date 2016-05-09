@@ -80,7 +80,9 @@ public class FiboClient {
                         }
                         System.out.printf("Done! Dump all to file " + resultFilePath);
                     } finally {
-                        rtResultFile.close();
+                        if (rspStream != null) {
+                            rspStream.close();
+                        }
                     }
                     break;
                 }
@@ -109,11 +111,12 @@ public class FiboClient {
         InputStream rspStream = response.readEntity(InputStream.class);
         try {
             byte[] buf = new byte[FILE_READ_BUF_SIZE];
-            int nRead = 0;
-            while ((nRead = rspStream.read(buf)) > 0) {
+            while (rspStream.read(buf) > 0) {
             }
         } finally {
-            rspStream.close();
+            if (rspStream != null) {
+                rspStream.close();
+            }
         }
     }
 
@@ -139,7 +142,9 @@ public class FiboClient {
             while ((nRead = rspStream.read(buf)) > 0) {
             }
         } finally {
-            rspStream.close();
+            if (rspStream != null) {
+                rspStream.close();
+            }
         }
     }
 
