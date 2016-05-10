@@ -41,3 +41,7 @@ Expose 2 public REST APIs:
     The first byte is to indicate the status. If it's 0 (means ready) then continue to read rest of it.
 
 #Next
+This system is able to extend to large scale to get better performance and high availability. Below are things we can do next:
+- Use Nginx as load balancer and multiple service nodes. 
+- Setup Redis cluster to persist Fibonacci values. All values could be partitioned to different groups, and each group has one master and multiple slaves for failover. 
+- Deploy multiple executor nodes to receive and handle tasks. We can create multiple partitions on the task topic, each executor node subscribe one or more partitions. Also multiple nodes can form a kafka consumer group for node down or network issue.
