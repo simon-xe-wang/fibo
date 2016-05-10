@@ -18,14 +18,14 @@ public class FiboResourceTest {
     @BeforeClass
     public static void setUp() throws Exception {
         // start the server
-        server = Main.startServer();
+     //   server = Main.startServer();
 
         fiboClient = new FiboClient();
     }
 
     @AfterClass
     public static void tearDown() throws Exception {
-        server.stop();
+    //    server.stop();
     }
 
     /**
