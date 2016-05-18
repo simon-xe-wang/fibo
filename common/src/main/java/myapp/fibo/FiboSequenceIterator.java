@@ -33,6 +33,7 @@ public class FiboSequenceIterator {
             fn_2 = fn_1;
             fn_1 = fn;
         }
+        fiboHandler.flush();
     }
 
     public void setHandler(FiboValueHandler handler) {
