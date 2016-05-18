@@ -26,6 +26,11 @@ public class FiboSequenceSyncComputeOutput implements StreamingOutput {
     }
 
     private static class FiboValueSyncHandler implements FiboValueHandler {
+
+        int bufSize = 1024*1024;
+
+        StringBuilder buf = new StringBuilder(bufSize);
+
         private Writer writer;
 
         public FiboValueSyncHandler(OutputStream outputStream) {
@@ -35,9 +40,18 @@ public class FiboSequenceSyncComputeOutput implements StreamingOutput {
         @Override
         public void handle(int sn, BigInteger val) {
             try {
-                writer.write(val.toString());
-                writer.write(" ");
+                buf.append(val.toString());
+                buf.append(" ");
+
+                if (buf.length() < bufSize) {
+                    return;
+                }
+
+                 // buffer overflow, time to flush
+                writer.write(buf.toString());
                 writer.flush();
+                // reset buffer
+                buf.setLength(0);
             } catch (IOException e) {
                 throw new RuntimeException("Error to write fibo value " + val, e);
             }
