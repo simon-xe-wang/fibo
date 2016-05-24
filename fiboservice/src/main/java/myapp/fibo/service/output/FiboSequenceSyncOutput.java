@@ -53,5 +53,10 @@ public class FiboSequenceSyncOutput implements StreamingOutput {
                 throw new RuntimeException("Error to write fibo value " + val, e);
             }
         }
+
+        @Override
+        public void flush() {
+
+        }
     }
 }

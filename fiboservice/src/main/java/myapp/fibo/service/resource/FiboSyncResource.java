@@ -2,7 +2,7 @@ package myapp.fibo.service.resource;
 
 import myapp.fibo.seqstore.FiboSequenceStore;
 import myapp.fibo.seqstore.FiboSequenceStoreRedis;
-import myapp.fibo.service.output.FiboSequenceSyncComputeOutput;
+import myapp.fibo.service.output.FiboSequenceOutputSyncComputingImpl;
 import myapp.fibo.service.output.FiboSequenceSyncOutput;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,7 +53,7 @@ public class FiboSyncResource {
 
         checkParam(sn);
 
-        FiboSequenceSyncComputeOutput output = new FiboSequenceSyncComputeOutput(sn);
+        FiboSequenceOutputSyncComputingImpl output = new FiboSequenceOutputSyncComputingImpl(sn);
         return Response.ok(output).build();
     }
 
